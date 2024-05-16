@@ -16,7 +16,8 @@ from img2pdf.core import fld2pdf, fld2thumb
 from img2tph.core import img2tph
 from plugins import MangaClient, ManhuaKoClient, MangaCard, MangaChapter, ManhuaPlusClient, TMOClient, MangaDexClient, \
     MangasInClient, McReaderClient, MangaKakalotClient, ManganeloClient, ManganatoClient, LikemangaClient, \
-    KissMangaClient, MangatigreClient, MangaHasuClient, MangaBuddyClient, AsuraScansClient, NineMangaClient, ComickClient
+    KissMangaClient, MangatigreClient, MangaHasuClient, MangaBuddyClient, AsuraScansClient, NineMangaClient, ComickClient, \
+    NovelBuddyClient
 import os
 
 from pyrogram import Client, filters
@@ -53,7 +54,9 @@ plugin_dicts: Dict[str, Dict[str, MangaClient]] = {
         "MangaBuddy": MangaBuddyClient(),
         "AsuraScans": AsuraScansClient(),
         "NineManga": NineMangaClient(),        
-        "Likemanga": LikemangaClient(),
+        #"Likemanga": LikemangaClient(),
+        #"Comick": ComickClient(),
+        #"NovelBuddy": NovelBuddyClient(), 
           },
     "🇪🇸 ES": {
         "MangaDex": MangaDexClient(language=("es-la", "es")),
@@ -87,7 +90,7 @@ class OutputOptions(enum.IntEnum):
         return self.value | other
 
 
-disabled = ["[🇬🇧 EN] McReader", "[🇬🇧 EN] Manhuaplus", "[🇪🇸 ES] MangasIn"]
+disabled = ["[🇬🇧 EN] McReader", "[🇬🇧 EN] Manhuaplus", "[🇪🇸 ES] MangasIn", "[🇪🇸 ES] Likemanga"]
 
 plugins = dict()
 for lang, plugin_dict in plugin_dicts.items():
@@ -176,7 +179,7 @@ async def on_start(client: Client, message: Message):
                         "\n"
                         "Check /help for more information.")
     logger.info(f"User {message.from_user.id} finished the start command")
-
+    
 
 @bot.on_message(filters=filters.command(['help']))
 async def on_help(client: Client, message: Message):

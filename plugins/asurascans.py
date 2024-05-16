@@ -1,3 +1,6 @@
+#THis Code is made by Wizard Bots on telegram
+# t.me/Wizard_Bots
+
 from typing import List, AsyncIterable
 from urllib.parse import urlparse, urljoin, quote, quote_plus
 
@@ -8,7 +11,7 @@ from plugins.client import MangaClient, MangaCard, MangaChapter, LastChapter
 
 class AsuraScansClient(MangaClient):
 
-    base_url = urlparse("https://www.asurascans.com/")
+    base_url = urlparse("https://asuracomic.net/")
     search_url = base_url.geturl()
     search_param = 's'
     updates_url = base_url.geturl()
@@ -74,7 +77,7 @@ class AsuraScansClient(MangaClient):
 
         container = bs.find("div", {"id": "readerarea"})
 
-        images = map(lambda x: x.findNext('img'), container.findAll('p'))
+        images = container.find_all("img")
 
         images_url = [quote(img.get('src'), safe=':/%') for img in images]
 
